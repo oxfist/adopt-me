@@ -18,6 +18,48 @@ const LocationField = ({ location, handler }) => {
   );
 };
 
+const AnimalField = ({ animal, handler }) => {
+  return (
+    <label htmlFor="animal">
+      Animal
+      <select
+        id="name"
+        name={animal}
+        onChange={(e) => handler(e.target.value)}
+        onBlur={(e) => handler(e.target.value)}
+      >
+        <option />
+        {ANIMALS.map((animal) => (
+          <option value={animal} key={animal}>
+            {animal}
+          </option>
+        ))}
+      </select>
+    </label>
+  );
+};
+
+const BreedField = ({ breed, handler, breeds }) => {
+  return (
+    <label htmlFor="breed">
+      Breed
+      <select
+        id="name"
+        name={breed}
+        onChange={(e) => handler(e.target.value)}
+        onBlur={(e) => handler(e.target.value)}
+      >
+        <option />
+        {breeds.map((breed) => (
+          <option value={breed} key={breed}>
+            {breed}
+          </option>
+        ))}
+      </select>
+    </label>
+  );
+};
+
 const SearchParams = () => {
   const [location, setLocation] = useState("Seattle, WA");
   const [animal, setAnimal] = useState("");
@@ -42,38 +84,8 @@ const SearchParams = () => {
     <div className="search-params">
       <form>
         <LocationField location={location} handler={setLocation} />
-        <label htmlFor="animal">
-          Animal
-          <select
-            id="name"
-            name={animal}
-            onChange={(e) => setAnimal(e.target.value)}
-            onBlur={(e) => setAnimal(e.target.value)}
-          >
-            <option />
-            {ANIMALS.map((animal) => (
-              <option value={animal} key={animal}>
-                {animal}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label htmlFor="breed">
-          Breed
-          <select
-            id="name"
-            name={breed}
-            onChange={(e) => setBreed(e.target.value)}
-            onBlur={(e) => setBreed(e.target.value)}
-          >
-            <option />
-            {breeds.map((breed) => (
-              <option value={breed} key={breed}>
-                {breed}
-              </option>
-            ))}
-          </select>
-        </label>
+        <AnimalField animal={animal} handler={setAnimal} />
+        <BreedField breed={breed} handler={setBreed} breeds={breeds} />
         <button>Submit</button>
       </form>
       <h2>Results:</h2>
