@@ -4,6 +4,20 @@ import Pet from "./Pet";
 
 const ANIMALS = Object.freeze(["bird", "cat", "dog", "rabbit", "reptile"]);
 
+const LocationField = ({ location, handler }) => {
+  return (
+    <label htmlFor="location">
+      Location
+      <input
+        id="location"
+        value={location}
+        onChange={(e) => handler(e.target.value)}
+        placeholder="Location"
+      />
+    </label>
+  );
+};
+
 const SearchParams = () => {
   const [location, setLocation] = useState("Seattle, WA");
   const [animal, setAnimal] = useState("");
@@ -27,15 +41,7 @@ const SearchParams = () => {
   return (
     <div className="search-params">
       <form>
-        <label htmlFor="location">
-          Location
-          <input
-            id="location"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            placeholder="Location"
-          />
-        </label>
+        <LocationField location={location} handler={setLocation} />
         <label htmlFor="animal">
           Animal
           <select
