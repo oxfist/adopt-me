@@ -83,7 +83,12 @@ const SearchParams = () => {
 
   return (
     <div className="search-params">
-      <form>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          requestPets();
+        }}
+      >
         <LocationField location={location} handler={setLocation} />
         <AnimalField animal={animal} handler={setAnimal} />
         <BreedField breed={breed} handler={setBreed} breeds={breeds} />
