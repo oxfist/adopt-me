@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const Details = () => {
-  const setLoading = useState(true)[1];
+  const [loading, setLoading] = useState(true);
   const [petDetails, setPetDetails] = useState({});
   const params = useParams();
 
@@ -21,6 +21,8 @@ const Details = () => {
   }
 
   const { name, animal, breed, city, state, description } = petDetails;
+
+  if (loading) return <h2>loading...</h2>;
 
   return (
     <div className="details">
