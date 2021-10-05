@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
+import Carousel from "./Carousel";
+
 const Details = () => {
   const [loading, setLoading] = useState(true);
   const [petDetails, setPetDetails] = useState({});
@@ -20,21 +22,24 @@ const Details = () => {
     setPetDetails(json.pets[0]);
   }
 
-  const { name, animal, breed, city, state, description } = petDetails;
+  const { name, animal, breed, city, state, description, images } = petDetails;
 
   return (
     <div className="details">
       {loading ? (
         <h2>loading...</h2>
       ) : (
-        <>
-          <h1>{name}</h1>
-          <h2>
-            {animal} - {breed} - {city}, {state}
-          </h2>
-          <button>Adopt {name}</button>
-          <p>{description}</p>
-        </>
+        <div>
+          <Carousel images={images} />
+          <div>
+            <h1>{name}</h1>
+            <h2>
+              {animal} - {breed} - {city}, {state}
+            </h2>
+            <button>Adopt {name}</button>
+            <p>{description}</p>
+          </div>
+        </div>
       )}
     </div>
   );
