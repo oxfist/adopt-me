@@ -22,16 +22,20 @@ const Details = () => {
 
   const { name, animal, breed, city, state, description } = petDetails;
 
-  if (loading) return <h2>loading...</h2>;
-
   return (
     <div className="details">
-      <h1>{name}</h1>
-      <h2>
-        {animal} - {breed} - {city}, {state}
-      </h2>
-      <button>Adopt {name}</button>
-      <p>{description}</p>
+      {loading ? (
+        <h2>loading...</h2>
+      ) : (
+        <>
+          <h1>{name}</h1>
+          <h2>
+            {animal} - {breed} - {city}, {state}
+          </h2>
+          <button>Adopt {name}</button>
+          <p>{description}</p>
+        </>
+      )}
     </div>
   );
 };
