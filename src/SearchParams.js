@@ -66,15 +66,16 @@ const SearchParams = () => {
   const [animal, setAnimal] = useState("");
   const [breed, setBreed] = useState("");
   const [pets, setPets] = useState([]);
+  const [page, setPage] = useState(0);
   const [breeds] = useBreedList(animal);
 
   useEffect(() => {
     requestPets();
-  }, []);
+  }, [page]);
 
   async function requestPets() {
     const res = await fetch(
-      `http://pets-v2.dev-apis.com/pets?animal=${animal}&location=${location}&breed=${breed}`
+      `http://pets-v2.dev-apis.com/pets?animal=${animal}&location=${location}&breed=${breed}&page=${page}`
     );
     const json = await res.json();
 
@@ -94,6 +95,18 @@ const SearchParams = () => {
         <BreedField breed={breed} handler={setBreed} breeds={breeds} />
         <button>Submit</button>
       </form>
+      <div className="pagination">
+        {page > 0 ? (
+          <button className="pagination-btn" onClick={() => setPage(page - 1)}>
+            {"<"}
+          </button>
+        ) : (
+          <></>
+        )}
+        <button className="pagination-btn" onClick={() => setPage(page + 1)}>
+          {">"}
+        </button>
+      </div>
       <h2>Results:</h2>
       <Results pets={pets} />
     </div>
