@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel src/index.html --open",
+    "build": "parcel build src/index.html",
     "format": "prettier --write \"src/**/*.{js,jsx}\"",
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet"
   },
